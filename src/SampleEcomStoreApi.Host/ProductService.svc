@@ -1,0 +1,1 @@
+<%@ ServiceHost Language="C#" Debug="true" Service="SampleEcomStoreApi.Services.ProductService" CodeBehind="ProductService.svc.cs" %>
