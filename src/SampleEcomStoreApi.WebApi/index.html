@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WCF API Tester</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .endpoint { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #005a8b; }
+        .response { background: #e8f5e8; padding: 15px; margin: 10px 0; border-radius: 3px; }
+        .error { background: #ffe8e8; }
+        input, textarea { width: 300px; padding: 5px; margin: 5px; }
+        textarea { height: 100px; width: 500px; }
+    </style>
+</head>
+<body>
+    <h1>WCF Service API Tester</h1>
+    <p>Make sure your ConsoleHost is running first!</p>
+
+    <div class="endpoint">
+        <h3>Get All Products</h3>
+        <button onclick="getAllProducts()">GET /ProductService (GetAllProducts)</button>
+        <div id="products-response"></div>
+    </div>
+
+    <div class="endpoint">
+        <h3>Get Product By ID</h3>
+        <input type="number" id="product-id" placeholder="Product ID" value="1">
+        <button onclick="getProductById()">GET Product</button>
+        <div id="product-response"></div>
+    </div>
+
+    <div class="endpoint">
+        <h3>Create Product</h3>
+        <div>
+            <input type="text" id="product-name" placeholder="Product Name" value="Test Product">
+            <input type="text" id="product-description" placeholder="Description" value="Test Description">
+            <input type="number" id="product-price" placeholder="Price" value="29.99" step="0.01">
+            <input type="text" id="product-category" placeholder="Category" value="Electronics">
+            <input type="number" id="product-stock" placeholder="Stock" value="10">
+        </div>
+        <button onclick="createProduct()">CREATE Product</button>
+        <div id="create-response"></div>
+    </div>
+
+    <div class="endpoint">
+        <h3>Search Products</h3>
+        <input type="text" id="search-query" placeholder="Search query" value="Product">
+        <button onclick="searchProducts()">SEARCH</button>
+        <div id="search-response"></div>
+    </div>
+
+    <div class="endpoint">
+        <h3>Raw SOAP Request</h3>
+        <textarea id="soap-request" placeholder="Enter SOAP XML here">
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetAllProducts xmlns="http://tempuri.org/" />
+  </soap:Body>
+</soap:Envelope>
+        </textarea><br>
+        <input type="text" id="soap-url" placeholder="Service URL" value="http://localhost:8731/ProductService/">
+        <button onclick="sendSoapRequest()">Send SOAP Request</button>
+        <div id="soap-response"></div>
+    </div>
+
+    <script>
+        function makeSOAPRequest(action, body, url, responseDiv) {
+            const soapEnvelope = `
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    ${body}
+  </soap:Body>
+</soap:Envelope>`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/xml; charset=utf-8',
+                    'SOAPAction': `http://tempuri.org/IProductService/${action}`
+                },
+                body: soapEnvelope
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(responseDiv).innerHTML = 
+                    `<div class="response"><pre>${escapeHtml(data)}</pre></div>`;
+            })
+            .catch(error => {
+                document.getElementById(responseDiv).innerHTML = 
+                    `<div class="response error">Error: ${error.message}</div>`;
+            });
+        }
+
+        function getAllProducts() {
+            makeSOAPRequest('GetAllProducts', 
+                '<GetAllProducts xmlns="http://tempuri.org/" />',
+                'http://localhost:8731/ProductService/',
+                'products-response'
+            );
+        }
+
+        function getProductById() {
+            const id = document.getElementById('product-id').value;
+            makeSOAPRequest('GetProductById',
+                `<GetProductById xmlns="http://tempuri.org/"><productId>${id}</productId></GetProductById>`,
+                'http://localhost:8731/ProductService/',
+                'product-response'
+            );
+        }
+
+        function createProduct() {
+            const name = document.getElementById('product-name').value;
+            const description = document.getElementById('product-description').value;
+            const price = document.getElementById('product-price').value;
+            const category = document.getElementById('product-category').value;
+            const stock = document.getElementById('product-stock').value;
+
+            const productXml = `
+            <CreateProduct xmlns="http://tempuri.org/">
+                <product>
+                    <Name>${name}</Name>
+                    <Description>${description}</Description>
+                    <Price>${price}</Price>
+                    <Category>${category}</Category>
+                    <StockQuantity>${stock}</StockQuantity>
+                    <IsActive>true</IsActive>
+                </product>
+            </CreateProduct>`;
+
+            makeSOAPRequest('CreateProduct', productXml,
+                'http://localhost:8731/ProductService/',
+                'create-response'
+            );
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('search-query').value;
+            makeSOAPRequest('SearchProducts',
+                `<SearchProducts xmlns="http://tempuri.org/"><searchTerm>${query}</searchTerm></SearchProducts>`,
+                'http://localhost:8731/ProductService/',
+                'search-response'
+            );
+        }
+
+        function sendSoapRequest() {
+            const request = document.getElementById('soap-request').value;
+            const url = document.getElementById('soap-url').value;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/xml; charset=utf-8'
+                },
+                body: request
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('soap-response').innerHTML = 
+                    `<div class="response"><pre>${escapeHtml(data)}</pre></div>`;
+            })
+            .catch(error => {
+                document.getElementById('soap-response').innerHTML = 
+                    `<div class="response error">Error: ${error.message}</div>`;
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

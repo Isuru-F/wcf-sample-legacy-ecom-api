@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:sam="http://schemas.datacontract.org/2004/07/SampleEcomStoreApi.Contracts.DataContracts">
+  <soap:Header/>
+  <soap:Body>
+    <tem:CreateCustomer>
+      <tem:customer>
+        <sam:Address>456 Another Street</sam:Address>
+        <sam:City>Demo City</sam:City>
+        <sam:Country>USA</sam:Country>
+        <sam:CustomerId>0</sam:CustomerId>
+        <sam:Email>jane.smith@demo.com</sam:Email>
+        <sam:FirstName>Jane</sam:FirstName>
+        <sam:IsActive>true</sam:IsActive>
+        <sam:LastName>Smith</sam:LastName>
+        <sam:Phone>555-987-6543</sam:Phone>
+        <sam:State>California</sam:State>
+        <sam:ZipCode>90210</sam:ZipCode>
+      </tem:customer>
+    </tem:CreateCustomer>
+  </soap:Body>
+</soap:Envelope>

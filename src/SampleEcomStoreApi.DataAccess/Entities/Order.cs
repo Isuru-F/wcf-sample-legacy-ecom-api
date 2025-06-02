@@ -21,7 +21,7 @@ namespace SampleEcomStoreApi.DataAccess.Entities
         public string Status { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = "decimal")]
         public decimal TotalAmount { get; set; }
 
         [StringLength(500)]

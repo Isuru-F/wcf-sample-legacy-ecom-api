@@ -1,51 +1,53 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using SampleEcomStoreApi.DataAccess.Entities;
 
 namespace SampleEcomStoreApi.DataAccess.Context
 {
-    public class EcommerceDbContext : IDisposable
+    public class EcommerceDbContext : DbContext
     {
-        // In-memory storage for demo purposes
-        public static List<Product> Products = new List<Product>();
-        public static List<Customer> Customers = new List<Customer>();
-        public static List<Order> Orders = new List<Order>();
-        public static List<OrderItem> OrderItems = new List<OrderItem>();
-
-        public EcommerceDbContext()
+        public EcommerceDbContext() : base("name=EcommerceDb")
         {
-            // Initialize with sample data if empty
-            if (Products.Count == 0)
-            {
-                InitializeSampleData();
-            }
+            Database.SetInitializer(new EcommerceDbInitializer());
         }
 
-        public int SaveChanges()
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // In a real implementation, this would save to database
-            return 1;
+            // Configure Entity Framework to work with SQLite
+            Database.SetInitializer(new EcommerceDbInitializer());
+            base.OnModelCreating(modelBuilder);
         }
+    }
 
-        public void Dispose()
+    public class EcommerceDbInitializer : CreateDatabaseIfNotExists<EcommerceDbContext>
+    {
+        protected override void Seed(EcommerceDbContext context)
         {
-            // Nothing to dispose in this demo implementation
-        }
-
-        private void InitializeSampleData()
-        {
-            Products.AddRange(new[]
+            // Initialize with sample data
+            var products = new List<Product>
             {
-                new Product { ProductId = 1, Name = "Laptop", Description = "High-performance laptop", Price = 999.99m, Category = "Electronics", StockQuantity = 10, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
-                new Product { ProductId = 2, Name = "Smartphone", Description = "Latest smartphone", Price = 699.99m, Category = "Electronics", StockQuantity = 25, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
-                new Product { ProductId = 3, Name = "Book", Description = "Programming book", Price = 39.99m, Category = "Books", StockQuantity = 50, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now }
-            });
+                new Product { Name = "Laptop", Description = "High-performance laptop", Price = 999.99m, Category = "Electronics", StockQuantity = 10, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
+                new Product { Name = "Smartphone", Description = "Latest smartphone", Price = 699.99m, Category = "Electronics", StockQuantity = 25, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
+                new Product { Name = "Book", Description = "Programming book", Price = 39.99m, Category = "Books", StockQuantity = 50, IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now }
+            };
 
-            Customers.AddRange(new[]
+            var customers = new List<Customer>
             {
-                new Customer { CustomerId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@email.com", IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
-                new Customer { CustomerId = 2, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@email.com", IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now }
-            });
+                new Customer { FirstName = "John", LastName = "Doe", Email = "john.doe@email.com", IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now },
+                new Customer { FirstName = "Jane", LastName = "Smith", Email = "jane.smith@email.com", IsActive = true, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now }
+            };
+
+            context.Products.AddRange(products);
+            context.Customers.AddRange(customers);
+            context.SaveChanges();
+
+            base.Seed(context);
         }
     }
 }

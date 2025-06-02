@@ -12,7 +12,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Customers.Where(c => c.IsActive).ToList();
+                return context.Customers.Where(c => c.IsActive).ToList();
             }
         }
 
@@ -20,7 +20,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId && c.IsActive);
+                return context.Customers.FirstOrDefault(c => c.CustomerId == customerId && c.IsActive);
             }
         }
 
@@ -28,7 +28,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Customers.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase) && c.IsActive);
+                return context.Customers.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase) && c.IsActive);
             }
         }
 
@@ -36,12 +36,11 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                customer.CustomerId = EcommerceDbContext.Customers.Count + 1;
                 customer.CreatedDate = DateTime.Now;
                 customer.ModifiedDate = DateTime.Now;
                 customer.IsActive = true;
 
-                EcommerceDbContext.Customers.Add(customer);
+                context.Customers.Add(customer);
                 context.SaveChanges();
                 return customer.CustomerId;
             }
@@ -51,7 +50,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var existingCustomer = EcommerceDbContext.Customers.FirstOrDefault(c => c.CustomerId == customer.CustomerId);
+                var existingCustomer = context.Customers.FirstOrDefault(c => c.CustomerId == customer.CustomerId);
                 if (existingCustomer == null) return false;
 
                 existingCustomer.FirstName = customer.FirstName;
@@ -74,10 +73,10 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var customer = EcommerceDbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId);
+                var customer = context.Customers.FirstOrDefault(c => c.CustomerId == customerId);
                 if (customer == null) return false;
 
-                EcommerceDbContext.Customers.Remove(customer);
+                context.Customers.Remove(customer);
                 context.SaveChanges();
                 return true;
             }
@@ -87,7 +86,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var customer = EcommerceDbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId);
+                var customer = context.Customers.FirstOrDefault(c => c.CustomerId == customerId);
                 if (customer == null) return false;
 
                 customer.IsActive = false;

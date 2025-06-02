@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:sam="http://schemas.datacontract.org/2004/07/SampleEcomStoreApi.Contracts.DataContracts">
+  <soap:Header/>
+  <soap:Body>
+    <tem:CreateCustomer>
+      <tem:customer>
+        <sam:Address>789 Test Avenue</sam:Address>
+        <sam:City>New Test City</sam:City>
+        <sam:Country>United States</sam:Country>
+        <sam:CustomerId>0</sam:CustomerId>
+        <sam:Email>bob.test@example.com</sam:Email>
+        <sam:FirstName>Bob</sam:FirstName>
+        <sam:IsActive>true</sam:IsActive>
+        <sam:LastName>Tester</sam:LastName>
+        <sam:Phone>555-111-2222</sam:Phone>
+        <sam:State>New York</sam:State>
+        <sam:ZipCode>10001</sam:ZipCode>
+      </tem:customer>
+    </tem:CreateCustomer>
+  </soap:Body>
+</soap:Envelope>

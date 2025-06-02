@@ -13,7 +13,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Orders.ToList();
+                return context.Orders.ToList();
             }
         }
 
@@ -21,7 +21,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Orders.FirstOrDefault(o => o.OrderId == orderId);
+                return context.Orders.FirstOrDefault(o => o.OrderId == orderId);
             }
         }
 
@@ -29,7 +29,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Orders
+                return context.Orders
                     .Where(o => o.CustomerId == customerId)
                     .OrderByDescending(o => o.OrderDate)
                     .ToList();
@@ -40,7 +40,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Orders
+                return context.Orders
                     .Where(o => o.Status.Equals(status, StringComparison.OrdinalIgnoreCase))
                     .OrderByDescending(o => o.OrderDate)
                     .ToList();
@@ -51,7 +51,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                order.OrderId = EcommerceDbContext.Orders.Count + 1;
+                order.OrderId = context.Orders.Count() + 1;
                 order.OrderDate = DateTime.Now;
                 order.CreatedDate = DateTime.Now;
                 order.ModifiedDate = DateTime.Now;
@@ -61,7 +61,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
                     order.Status = OrderStatus.Pending;
                 }
 
-                EcommerceDbContext.Orders.Add(order);
+                context.Orders.Add(order);
                 context.SaveChanges();
                 return order.OrderId;
             }
@@ -71,7 +71,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var existingOrder = EcommerceDbContext.Orders.FirstOrDefault(o => o.OrderId == order.OrderId);
+                var existingOrder = context.Orders.FirstOrDefault(o => o.OrderId == order.OrderId);
                 if (existingOrder == null) return false;
 
                 existingOrder.Status = order.Status;
@@ -89,7 +89,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var order = EcommerceDbContext.Orders.FirstOrDefault(o => o.OrderId == orderId);
+                var order = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
                 if (order == null) return false;
 
                 order.Status = status;
@@ -104,7 +104,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var order = EcommerceDbContext.Orders.FirstOrDefault(o => o.OrderId == orderId);
+                var order = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
                 if (order == null) return false;
 
                 order.Status = OrderStatus.Cancelled;

@@ -12,7 +12,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Products.Where(p => p.IsActive).ToList();
+                return context.Products.Where(p => p.IsActive).ToList();
             }
         }
 
@@ -20,7 +20,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Products.FirstOrDefault(p => p.ProductId == productId && p.IsActive);
+                return context.Products.FirstOrDefault(p => p.ProductId == productId && p.IsActive);
             }
         }
 
@@ -28,7 +28,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Products
+                return context.Products
                     .Where(p => p.Category.Equals(category, StringComparison.OrdinalIgnoreCase) && p.IsActive)
                     .ToList();
             }
@@ -38,7 +38,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                return EcommerceDbContext.Products
+                return context.Products
                     .Where(p => (p.Name.Contains(searchTerm) || p.Description.Contains(searchTerm)) && p.IsActive)
                     .ToList();
             }
@@ -48,12 +48,12 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                product.ProductId = EcommerceDbContext.Products.Count + 1;
+                product.ProductId = context.Products.Count() + 1;
                 product.CreatedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
                 product.IsActive = true;
 
-                EcommerceDbContext.Products.Add(product);
+                context.Products.Add(product);
                 context.SaveChanges();
                 return product.ProductId;
             }
@@ -63,7 +63,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var existingProduct = EcommerceDbContext.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
+                var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
                 if (existingProduct == null) return false;
 
                 existingProduct.Name = product.Name;
@@ -83,7 +83,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var product = EcommerceDbContext.Products.FirstOrDefault(p => p.ProductId == productId);
+                var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
                 if (product == null) return false;
 
                 product.IsActive = false;
@@ -98,7 +98,7 @@ namespace SampleEcomStoreApi.DataAccess.Repositories
         {
             using (var context = new EcommerceDbContext())
             {
-                var product = EcommerceDbContext.Products.FirstOrDefault(p => p.ProductId == productId);
+                var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
                 if (product == null) return false;
 
                 product.StockQuantity = quantity;

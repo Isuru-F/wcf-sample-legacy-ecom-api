@@ -19,11 +19,11 @@ namespace SampleEcomStoreApi.DataAccess.Entities
         public int Quantity { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = "decimal")]
         public decimal UnitPrice { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = "decimal")]
         public decimal TotalPrice { get; set; }
 
         [ForeignKey("OrderId")]
