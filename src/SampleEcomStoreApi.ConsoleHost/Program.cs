@@ -29,14 +29,14 @@ namespace SampleEcomStoreApi.ConsoleHost
                 Console.WriteLine("Services are running. Press Enter to stop...");
                 Console.WriteLine();
                 Console.WriteLine("Available endpoints:");
-                Console.WriteLine("Product Service: http://localhost:8001/ProductService");
-                Console.WriteLine("Customer Service: http://localhost:8002/CustomerService");
-                Console.WriteLine("Order Service: http://localhost:8003/OrderService");
+                Console.WriteLine("Product Service: http://localhost:8731/ProductService/");
+                Console.WriteLine("Customer Service: http://localhost:8732/CustomerService/");
+                Console.WriteLine("Order Service: http://localhost:8733/OrderService/");
                 Console.WriteLine();
                 Console.WriteLine("WSDL URLs:");
-                Console.WriteLine("Product Service WSDL: http://localhost:8001/ProductService?wsdl");
-                Console.WriteLine("Customer Service WSDL: http://localhost:8002/CustomerService?wsdl");
-                Console.WriteLine("Order Service WSDL: http://localhost:8003/OrderService?wsdl");
+                Console.WriteLine("Product Service WSDL: http://localhost:8731/ProductService/?wsdl");
+                Console.WriteLine("Customer Service WSDL: http://localhost:8732/CustomerService/?wsdl");
+                Console.WriteLine("Order Service WSDL: http://localhost:8733/OrderService/?wsdl");
                 
                 Console.ReadLine();
                 
@@ -77,34 +77,34 @@ namespace SampleEcomStoreApi.ConsoleHost
         private static void StartServices()
         {
             // Product Service
-            productServiceHost = new ServiceHost(container.Resolve<ProductService>(), new Uri("http://localhost:8001/"));
+            productServiceHost = new ServiceHost(container.Resolve<ProductService>(), new Uri("http://localhost:8731/ProductService/"));
             productServiceHost.AddServiceEndpoint(
                 typeof(SampleEcomStoreApi.Contracts.ServiceContracts.IProductService),
                 new BasicHttpBinding(),
-                "ProductService");
+                "");
             EnableMetadata(productServiceHost);
             productServiceHost.Open();
-            Console.WriteLine("Product Service started at http://localhost:8001/ProductService");
+            Console.WriteLine("Product Service started at http://localhost:8731/ProductService/");
 
             // Customer Service
-            customerServiceHost = new ServiceHost(container.Resolve<CustomerService>(), new Uri("http://localhost:8002/"));
+            customerServiceHost = new ServiceHost(container.Resolve<CustomerService>(), new Uri("http://localhost:8732/CustomerService/"));
             customerServiceHost.AddServiceEndpoint(
                 typeof(SampleEcomStoreApi.Contracts.ServiceContracts.ICustomerService),
                 new BasicHttpBinding(),
-                "CustomerService");
+                "");
             EnableMetadata(customerServiceHost);
             customerServiceHost.Open();
-            Console.WriteLine("Customer Service started at http://localhost:8002/CustomerService");
+            Console.WriteLine("Customer Service started at http://localhost:8732/CustomerService/");
 
             // Order Service
-            orderServiceHost = new ServiceHost(container.Resolve<OrderService>(), new Uri("http://localhost:8003/"));
+            orderServiceHost = new ServiceHost(container.Resolve<OrderService>(), new Uri("http://localhost:8733/OrderService/"));
             orderServiceHost.AddServiceEndpoint(
                 typeof(SampleEcomStoreApi.Contracts.ServiceContracts.IOrderService),
                 new BasicHttpBinding(),
-                "OrderService");
+                "");
             EnableMetadata(orderServiceHost);
             orderServiceHost.Open();
-            Console.WriteLine("Order Service started at http://localhost:8003/OrderService");
+            Console.WriteLine("Order Service started at http://localhost:8733/OrderService/");
         }
 
         private static void EnableMetadata(ServiceHost serviceHost)
