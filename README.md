@@ -30,7 +30,7 @@ SampleEcomStoreApi/
 ├── tests/
 │   ├── SampleEcomStoreApi.Tests/            # Unit tests
 │   └── SampleEcomStoreApi.IntegrationTests/ # Integration tests
-├── SampleEcomStoreApiTestClient/            # Modern .NET 8.0 Test Client (Separate Solution)
+├── legacy-api-test-client/                  # Modern .NET 8.0 Test Client (Separate Solution)
 │   ├── TestClient/                          # Console-based test application
 │   │   ├── ServiceProxies/                  # WCF service contracts & DTOs
 │   │   ├── Services/                        # Service client factory
@@ -161,7 +161,7 @@ nunit-console tests\SampleEcomStoreApi.IntegrationTests\bin\Debug\SampleEcomStor
 
 ## Modern Test Client (.NET 8.0)
 
-A comprehensive test client is included in the `SampleEcomStoreApiTestClient/` directory, built with modern .NET 8.0. This client is **perfect for API testing and upgrade verification**.
+A comprehensive test client is included in the `legacy-api-test-client/` directory, built with modern .NET 8.0. This client is **perfect for API testing and upgrade verification**.
 
 ### Key Features
 
@@ -184,7 +184,7 @@ A comprehensive test client is included in the `SampleEcomStoreApiTestClient/` d
 2. **Run the Test Client**
    ```bash
    # Navigate to test client (separate solution)
-   cd SampleEcomStoreApiTestClient
+   cd legacy-api-test-client
    dotnet run --project TestClient
    ```
 
