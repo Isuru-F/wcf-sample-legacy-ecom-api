@@ -7,7 +7,7 @@ using SampleEcomStoreApi.Common.Logging;
 
 namespace SampleEcomStoreApi.Services
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ProductService : IProductService
     {
         private readonly IProductManager _productManager;

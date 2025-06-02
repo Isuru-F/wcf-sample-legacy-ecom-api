@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3D4E5F6-G7H8-9012-CDEF-34567890CDEF}</ProjectGuid>
+    <ProjectGuid>{C3D4E5F6-0000-0000-0000-000000000000}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SampleEcomStoreApi.DataAccess</RootNamespace>
@@ -44,15 +44,12 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Mappers\CustomerMapper.cs" />
-    <Compile Include="Mappers\OrderMapper.cs" />
-    <Compile Include="Mappers\ProductMapper.cs" />
-    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\SimpleProductRepository.cs" />
+    <Compile Include="Repositories\SimpleCustomerRepository.cs" />
+    <Compile Include="Repositories\SimpleOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleEcomStoreApi.Common\SampleEcomStoreApi.Common.csproj">
-      <Project>{B2C3D4E5-F6G7-8901-BCDE-234567890BCD}</Project>
+      <Project>{B2C3D4E5-F6A7-8901-BCDE-234567890BCD}</Project>
       <Name>SampleEcomStoreApi.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\SampleEcomStoreApi.Contracts\SampleEcomStoreApi.Contracts.csproj">

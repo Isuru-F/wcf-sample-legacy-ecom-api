@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.ServiceModel;
 using SampleEcomStoreApi.Contracts.ServiceContracts;
 using SampleEcomStoreApi.Contracts.DataContracts;
 
 namespace SampleEcomStoreApi.Services
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class CustomerService : ICustomerService
     {
         public List<CustomerDto> GetAllCustomers()

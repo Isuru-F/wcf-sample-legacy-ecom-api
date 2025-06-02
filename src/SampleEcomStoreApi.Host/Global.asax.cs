@@ -23,8 +23,8 @@ namespace SampleEcomStoreApi.Host
             
             // Register repositories
             container.Register(Component.For<IProductRepository>().ImplementedBy<SimpleProductRepository>());
-            container.Register(Component.For<ICustomerRepository>().ImplementedBy<CustomerRepository>());
-            container.Register(Component.For<IOrderRepository>().ImplementedBy<OrderRepository>());
+            container.Register(Component.For<ICustomerRepository>().ImplementedBy<SimpleCustomerRepository>());
+            container.Register(Component.For<IOrderRepository>().ImplementedBy<SimpleOrderRepository>());
             
             // Register business managers
             container.Register(Component.For<IProductManager>().ImplementedBy<ProductManager>());

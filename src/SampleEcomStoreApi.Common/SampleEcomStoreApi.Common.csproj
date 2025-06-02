@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2C3D4E5-F6G7-8901-BCDE-234567890BCD}</ProjectGuid>
+    <ProjectGuid>{B2C3D4E5-0000-0000-0000-000000000000}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SampleEcomStoreApi.Common</RootNamespace>

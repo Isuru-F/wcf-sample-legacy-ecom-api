@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28 d17.14
+VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleEcomStoreApi.Contracts", "src\SampleEcomStoreApi.Contracts\SampleEcomStoreApi.Contracts.csproj", "{A1B2C3D4-E5F6-7890-ABCD-123456789ABC}"
 EndProject
@@ -19,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleEcomStoreApi.Tests", "tests\SampleEcomStoreApi.Tests\SampleEcomStoreApi.Tests.csproj", "{418FF309-A4F7-4877-A723-F465025825F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleEcomStoreApi.IntegrationTests", "tests\SampleEcomStoreApi.IntegrationTests\SampleEcomStoreApi.IntegrationTests.csproj", "{4DCE4EAB-5507-43B5-8300-EE9AC79BBC67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleEcomStoreApi.ConsoleHost", "src\SampleEcomStoreApi.ConsoleHost\SampleEcomStoreApi.ConsoleHost.csproj", "{A1B2C3D4-E5F6-7890-A123-456789ABCDEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,8 +64,15 @@ Global
 		{4DCE4EAB-5507-43B5-8300-EE9AC79BBC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DCE4EAB-5507-43B5-8300-EE9AC79BBC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DCE4EAB-5507-43B5-8300-EE9AC79BBC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-A123-456789ABCDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-A123-456789ABCDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-A123-456789ABCDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-A123-456789ABCDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38303308-D6F0-451F-9873-ED0D167407D6}
 	EndGlobalSection
 EndGlobal

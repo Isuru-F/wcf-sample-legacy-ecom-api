@@ -30,9 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
+
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,11 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\SampleEcomStoreApi.BusinessLogic\SampleEcomStoreApi.BusinessLogic.csproj">
-      <Project>{D4E5F6G7-H8I9-0123-DEF0-4567890DEF01}</Project>
+      <Project>{D4E5F6A7-B8C9-0123-DEF0-4567890DEF01}</Project>
       <Name>SampleEcomStoreApi.BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\SampleEcomStoreApi.Common\SampleEcomStoreApi.Common.csproj">
-      <Project>{B2C3D4E5-F6G7-8901-BCDE-234567890BCD}</Project>
+      <Project>{B2C3D4E5-F6A7-8901-BCDE-234567890BCD}</Project>
       <Name>SampleEcomStoreApi.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\SampleEcomStoreApi.Contracts\SampleEcomStoreApi.Contracts.csproj">
@@ -62,7 +60,7 @@
       <Name>SampleEcomStoreApi.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\SampleEcomStoreApi.DataAccess\SampleEcomStoreApi.DataAccess.csproj">
-      <Project>{C3D4E5F6-G7H8-9012-CDEF-34567890CDEF}</Project>
+      <Project>{C3D4E5F6-A7B8-9012-CDEF-34567890CDEF}</Project>
       <Name>SampleEcomStoreApi.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
